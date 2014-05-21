@@ -40,7 +40,6 @@ public class StartApp extends CordovaPlugin
     }
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    public PluginResult execute(String action, JSONArray args, String callbackId)
     {
         try {
             if (action.equals("startApp")) {
