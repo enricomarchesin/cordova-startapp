@@ -20,8 +20,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <source-file src="src/android/StartApp.java" target-dir="src/com/phonegap/plugins/startapp" />
 
         <!-- android specific file apis -->
-        <js-module src="www/android/startapp.js" name="androidStartApp">
-            <merges target="window.startapp" />
+        <js-module src="www/android/startapp.js" name="StartApp">
+            <merges target="cordova.plugins.startapp" />
         </js-module>
     </platform>
 
@@ -36,8 +36,8 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         <source-file src="src/ios/StartApp.m" />
 
         <!-- ios specific file apis -->
-        <js-module src="www/ios/startapp.js" name="iosStartApp">
-            <merges target="window.startapp" />
+        <js-module src="www/ios/startapp.js" name="StartApp">
+            <merges target="cordova.plugins.startapp" />
         </js-module>
     </platform>
 

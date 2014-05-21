@@ -1,15 +1,13 @@
-/**
- * Cordova StartApp plugin
- * Author: Dmitry Medvinsky <dmedvinsky@gmail.com>
- * License: MIT/X11
- */
-var StartApp = function() { };
+var argscheck = require('cordova/argscheck'),
+    utils = require('cordova/utils'),
+    exec = require('cordova/exec');
 
-StartApp.prototype.start = function(params, success, fail) {
-    success = success ? success : function() {};
-    fail = fail ? fail : function() {};
-    var url = params.ios;
-    return cordova.exec(success, fail, 'StartApp', 'start', [url]);
+var StartApp = function() { 
 };
 
-window.startapp = new StartApp();
+StartApp.start = function(params, success, fail) {
+    var component = params.ios;
+    exec(success, fail, "StartApp", "start", [component]);
+};
+
+module.exports = StartApp;

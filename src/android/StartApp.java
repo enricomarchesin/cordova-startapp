@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import android.content.ComponentName;
 import android.content.Intent;
+import android.content.Context;
 
 
 /**
@@ -19,45 +20,23 @@ import android.content.Intent;
  * @author Dmitry Medvinsky <dmedvinsky@gmail.com>
  * @license MIT/X11
  */
-public class StartApp extends CordovaPlugin
-{
-    /**
-     * Executes the request and returns PluginResult.
-     *
-     * @param action
-     *          Action to perform.
-     * @param args
-     *          Arguments to the action.
-     * @param callbackId
-     *          JavaScript callback ID.
-     * @return A PluginResult object with a status and message.
-     */
-
-    /**
-     * Constructor.
-     */
+public class StartApp extends CordovaPlugin {
     public StartApp() {
     }
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-    {
-        try {
-            if (action.equals("startApp")) {
-                if (args.length() != 1) {
-		            callbackContext.error("invalid action");
-                }
-                String component = args.getString(0);
-                startActivity(component);
-                callbackContext.success();
-		        return true;
-            } else {
-	            callbackContext.error("invalid action");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            callbackContext.error("invalid exception");
-        }
-		return false;
+		if (action.equals("startApp")) {
+			if (args.length() != 1) {
+				callbackContext.error("invalid action");
+				return false;
+			}
+			String component = args.getString(0);
+			startActivity(component);
+			callbackContext.success();
+		} else {
+			return false;
+		}
+        return true;
     }
 
     /**
