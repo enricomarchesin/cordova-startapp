@@ -1,0 +1,18 @@
+{
+    "version": "0.0.1",
+    "name": "com.phonegap.plugins.startapp",
+    "cordova_name": "StartApp",
+    "description": "Cordova StartApp Plugin",
+    "license": "Apache 2.0",
+    "keywords": [
+        "cordova",
+        "start",
+        "app"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.0.0"
+        }
+    ]
+}

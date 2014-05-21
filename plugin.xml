@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+xmlns:android="http://schemas.android.com/apk/res/android"
+           id="com.phonegap.plugins.startapp"
+      version="0.0.1">
+    <name>StartApp</name>
+    <description>Cordova StartApp</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,start,app</keywords>
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="StartApp" >
+                <param name="android-package" value="com.phonegap.plugins.startapp.StartApp"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/StartApp.java" target-dir="src/com/phonegap/plugins/startapp" />
+
+        <!-- android specific file apis -->
+        <js-module src="www/android/startapp.js" name="androidStartApp">
+            <merges target="window.startapp" />
+        </js-module>
+    </platform>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="StartApp">
+                <param name="ios-package" value="StartApp" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/StartApp.h" />
+        <source-file src="src/ios/StartApp.m" />
+
+        <!-- ios specific file apis -->
+        <js-module src="www/ios/startapp.js" name="iosStartApp">
+            <merges target="window.startapp" />
+        </js-module>
+    </platform>
+
+</plugin>
