@@ -25,7 +25,7 @@ public class StartApp extends CordovaPlugin {
     }
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-		if (action.equals("startApp")) {
+		if (action.equals("start")) {
 			if (args.length() != 1) {
 				callbackContext.error("invalid action");
 				return false;
@@ -47,10 +47,8 @@ public class StartApp extends CordovaPlugin {
      *            E.g.: com.mycompany.myapp/com.mycompany.myapp.MyActivity
      */
     void startActivity(String component) {
-        Intent intent = new Intent("android.intent.action.MAIN");
-        intent.addCategory("android.intent.category.LAUNCHER");
-        intent.setComponent(ComponentName.unflattenFromString(component));
-        Context context=this.cordova.getActivity().getApplicationContext();
-        context.startActivity(intent);
+      Context context=this.cordova.getActivity();
+      Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(component);
+      context.startActivity(LaunchIntent);        
     }
 }
