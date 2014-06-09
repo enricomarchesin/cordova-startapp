@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.Context;
+import android.util.Log;
 
 
 /**
@@ -26,17 +27,22 @@ public class StartApp extends CordovaPlugin {
 
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("start")) {
+            Log.d("STARTAPP", "start");
 			if (args.length() != 1) {
 				callbackContext.error("invalid action");
 				return false;
 			}
 			String component = args.getString(0);
-			startActivity(component);
-			callbackContext.success();
+			if (startActivity(component)) {
+              callbackContext.success();
+              return true;
+            } else {
+              callbackContext.error("application does not exist.");
+		      return false;
+            }
 		} else {
 			return false;
 		}
-        return true;
     }
 
     /**
@@ -46,9 +52,20 @@ public class StartApp extends CordovaPlugin {
      *            Activity ComponentName.
      *            E.g.: com.mycompany.myapp/com.mycompany.myapp.MyActivity
      */
-    void startActivity(String component) {
+    private boolean startActivity(String component) {
       Context context=this.cordova.getActivity();
-      Intent LaunchIntent = context.getPackageManager().getLaunchIntentForPackage(component);
-      context.startActivity(LaunchIntent);        
+      Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(component);
+      
+      if (launchIntent == null) {
+        return false;
+      }
+      
+      try {
+        context.startActivity(launchIntent);
+        return true;
+      } catch (Exception e) {
+        return false;
+      }
     }
 }
+
